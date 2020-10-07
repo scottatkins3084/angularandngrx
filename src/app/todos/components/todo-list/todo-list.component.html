@@ -1,0 +1,12 @@
+<ul class="todo-list">
+  <li *ngFor="let todo of todoList; let i = index" [ngClass]="[todo.editing?'editing': '', todo.completed?'completed': '']">
+    <div class="view">
+      <input class="toggle" [ngClass]="todo.completed?'checked': ''" type="checkbox" (click)="changeStatus(i)"/>
+      <label (dblclick)="doubleClick(i)">{{todo.text}}</label>
+      <button class="destroy" (click)="delete(i)"></button>
+    </div>
+    <form #editedTodo="ngForm" (submit)="update(editedTodo.value.newTodo, i)" (focusout)="update(editedTodo.value.newTodo, i)">
+      <input class="edit" type="text" [ngModel]="todo.text" name="newTodo">
+    </form>
+  </li>
+</ul>
